@@ -5,7 +5,7 @@ let package = Package(
     name: "LTHPasscodeViewController",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v10)
+        .iOS(.v13)
     ],
     products: [
         .library(
@@ -15,9 +15,14 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "LTHPasscodeViewController_Swift",
+            path: "LTHPasscodeViewController/Swift"
+        ),
+        .target(
             name: "LTHPasscodeViewController",
+            dependencies: ["LTHPasscodeViewController_Swift"],
             path: ".",
-            exclude: ["Demo", "CHANGELOG.md", "README.md"],
+            exclude: ["Demo", "CHANGELOG.md", "README.md", "LTHPasscodeViewController/Swift"],
             resources: [
                 .process("Localizations/LTHPasscodeViewController.bundle"),
                 .process("LICENSE.txt")
