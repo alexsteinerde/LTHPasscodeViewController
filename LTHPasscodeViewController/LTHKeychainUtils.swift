@@ -86,7 +86,7 @@ public class LTHKeychainUtils: NSObject {
         } else {
             print("DEFAULT")
             let password = try getPassword(resultData: resultData) ?? ""
-            try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true)
+            try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true, override: true)
             return password
         }
     }
@@ -109,21 +109,27 @@ public class LTHKeychainUtils: NSObject {
     }
     
     @objc public class func storeUsername(_ username: String?, andPassword password: String?, forServiceName serviceName: String?, updateExisting: Bool) throws {
+        try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: updateExisting, override: false)
+    }
+    
+    @objc private class func storeUsername(_ username: String?, andPassword password: String?, forServiceName serviceName: String?, updateExisting: Bool, override: Bool = false) throws {
         guard let username = username, let password = password, let serviceName = serviceName else {
             throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: -2000, userInfo: nil)
         }
         var existingPassword: String?
         // See if we already have a password entered for these credentials.
-        do {
-           existingPassword = try self.getPasswordForUsername(username, andServiceName: serviceName)
-        } catch {
-            if (error as NSError).code == -1999 {
-                // There is an existing entry without a password properly stored (possibly as a result of the previous incorrect version of this code.
-                
-                // Delete the existing item before moving on entering a correct one.
-                try deleteItem(forUsername: username, andServiceName: serviceName)
-            } else if (error as NSError).code != noErr {
-                throw error
+        if !override {
+            do {
+               existingPassword = try self.getPasswordForUsername(username, andServiceName: serviceName)
+            } catch {
+                if (error as NSError).code == -1999 {
+                    // There is an existing entry without a password properly stored (possibly as a result of the previous incorrect version of this code.
+                    
+                    // Delete the existing item before moving on entering a correct one.
+                    try deleteItem(forUsername: username, andServiceName: serviceName)
+                } else if (error as NSError).code != noErr {
+                    throw error
+                }
             }
         }
         
