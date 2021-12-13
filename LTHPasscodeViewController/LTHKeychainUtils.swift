@@ -85,10 +85,8 @@ public class LTHKeychainUtils: NSObject {
            let decryptedData = try? ChaChaPoly.open(sealedBoxToOpen, using: symmetricKey),
            let decryptedString = String(data: decryptedData, encoding: .utf8),
            decryptedString.hasPrefix(prefix) {
-            print(decryptedString)
             return String(decryptedString.dropFirst(prefix.count))
         } else {
-            print("DEFAULT")
             let password = try getPassword(resultData: resultData) ?? ""
             if !override {
                 try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true, override: true)
@@ -123,7 +121,7 @@ public class LTHKeychainUtils: NSObject {
             throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: -2000, userInfo: nil)
         }
         
-        var password = (prefix + paramPassword)
+        let password = (prefix + paramPassword)
         var existingPassword: String?
         // See if we already have a password entered for these credentials.
         do {
