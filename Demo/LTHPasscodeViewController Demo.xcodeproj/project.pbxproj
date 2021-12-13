@@ -18,6 +18,7 @@
 		2AE8004117D9507E00DBDE63 /* LTHDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AE8004017D9507E00DBDE63 /* LTHDemoViewController.m */; };
 		2AF19595182C09D5005CE38A /* LTHPasscodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF1958F182C09D5005CE38A /* LTHPasscodeViewController.m */; };
 		2AF19596182C09D5005CE38A /* LTHKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF19592182C09D5005CE38A /* LTHKeychainUtils.m */; };
+		92A0B8B02767A237006DEAA2 /* LTHKeychainUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A0B8AF2767A237006DEAA2 /* LTHKeychainUtils.swift */; };
 		A74908891BFBA75E00C6DA16 /* LTHPasscodeViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A74908881BFBA75E00C6DA16 /* LTHPasscodeViewController.bundle */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		2AF19591182C09D5005CE38A /* LTHKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTHKeychainUtils.h; sourceTree = "<group>"; };
 		2AF19592182C09D5005CE38A /* LTHKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = LTHKeychainUtils.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; };
 		2AF4E8391848F9FE00AB18EE /* LTHPasscodeViewController Demo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LTHPasscodeViewController Demo-Info.plist"; sourceTree = "<group>"; };
+		92A0B8AF2767A237006DEAA2 /* LTHKeychainUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTHKeychainUtils.swift; sourceTree = "<group>"; };
 		A74908881BFBA75E00C6DA16 /* LTHPasscodeViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LTHPasscodeViewController.bundle; sourceTree = "<group>"; };
 		E5FE63591BA05DCF00427B5F /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +135,7 @@
 				2AF1958F182C09D5005CE38A /* LTHPasscodeViewController.m */,
 				2AF19591182C09D5005CE38A /* LTHKeychainUtils.h */,
 				2AF19592182C09D5005CE38A /* LTHKeychainUtils.m */,
+				92A0B8AF2767A237006DEAA2 /* LTHKeychainUtils.swift */,
 			);
 			name = LTHPasscodeViewController;
 			path = ../../LTHPasscodeViewController;
@@ -179,6 +182,7 @@
 				TargetAttributes = {
 					2AE8000517D9503000DBDE63 = {
 						DevelopmentTeam = 78653ABY96;
+						LastSwiftMigration = 1310;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -235,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92A0B8B02767A237006DEAA2 /* LTHKeychainUtils.swift in Sources */,
 				2AE8001617D9503000DBDE63 /* main.m in Sources */,
 				2AE8004117D9507E00DBDE63 /* LTHDemoViewController.m in Sources */,
 				2AF19596182C09D5005CE38A /* LTHKeychainUtils.m in Sources */,
@@ -373,14 +378,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "LTHPasscodeViewController Demo/LTHPasscodeViewController Demo.entitlements";
 				DEVELOPMENT_TEAM = 78653ABY96;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTHPasscodeViewController Demo/LTHPasscodeViewController Demo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LTHPasscodeViewController Demo/LTHPasscodeViewController Demo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RolandLeth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "LTHPasscodeViewController Demo";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -389,14 +401,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "LTHPasscodeViewController Demo/LTHPasscodeViewController Demo.entitlements";
 				DEVELOPMENT_TEAM = 78653ABY96;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LTHPasscodeViewController Demo/LTHPasscodeViewController Demo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/LTHPasscodeViewController Demo/LTHPasscodeViewController Demo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RolandLeth.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "LTHPasscodeViewController Demo";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
