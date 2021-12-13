@@ -7,7 +7,7 @@
 //
 
 #import "LTHPasscodeViewController.h"
-#import "LTHKeychainUtils.h"
+#import <LTHPasscodeViewController_Demo-Swift.h>
 #import <LocalAuthentication/LocalAuthentication.h>
 
 #ifndef SWIFTPM_MODULE_BUNDLE
