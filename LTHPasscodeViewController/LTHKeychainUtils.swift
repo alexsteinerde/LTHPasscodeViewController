@@ -81,9 +81,13 @@ public class LTHKeychainUtils: NSObject {
            let decryptedData = try? ChaChaPoly.open(sealedBoxToOpen, using: symmetricKey),
            let decryptedString = String(data: decryptedData, encoding: .utf8),
            decryptedString.hasPrefix(prefix) {
+            print(decryptedString)
             return String(decryptedString.dropFirst(prefix.count))
         } else {
-            return try getPassword(resultData: resultData) ?? ""
+            print("DEFAULT")
+            let password = try getPassword(resultData: resultData) ?? ""
+            try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true)
+            return password
         }
     }
     
