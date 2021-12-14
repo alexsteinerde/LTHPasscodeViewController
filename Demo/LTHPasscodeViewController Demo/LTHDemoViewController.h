@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Roland Leth. All rights reserved.
 //
 
-#import "LTHPasscodeViewController.h"
+#import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 #import <UIKit/UIKit.h>
 
 @interface LTHDemoViewController : UIViewController

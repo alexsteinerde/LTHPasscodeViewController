@@ -22,10 +22,12 @@ public class LTHKeychainUtils: NSObject {
     }
     
     @objc private class func getPasswordForUsername(_ username: String?, andServiceName serviceName: String?, override: Bool = false) throws -> String {
-        
         guard let username = username, let serviceName = serviceName else {
             throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: -2000, userInfo: nil)
         }
+
+        print("USERNAME: \(username)")
+        print("SERVICE NAME: \(serviceName)")
         
         // Set up a query dictionary with the base query attributes: item type (generic), username, and service
         let keys: [String] = [
@@ -85,12 +87,14 @@ public class LTHKeychainUtils: NSObject {
            let decryptedData = try? ChaChaPoly.open(sealedBoxToOpen, using: symmetricKey),
            let decryptedString = String(data: decryptedData, encoding: .utf8),
            decryptedString.hasPrefix(prefix) {
+               print("UNCRYPTED PASSWORD: \(String(decryptedString.dropFirst(prefix.count)))")
             return String(decryptedString.dropFirst(prefix.count))
         } else {
             let password = try getPassword(resultData: resultData) ?? ""
             if !override {
                 try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true, override: true)
             }
+            print("PASSWORD: \(password)")
             return password
         }
     }
