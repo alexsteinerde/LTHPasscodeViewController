@@ -21,8 +21,7 @@ public class LTHKeychainUtils: NSObject {
         try getPasswordForUsername(username, andServiceName: serviceName, override: false)
     }
     
-    @objc private class func getPasswordForUsername(_ username: String?, andServiceName serviceName: String?, override: Bool = false) throws -> String {
-        
+    private class func getPasswordForUsername(_ username: String?, andServiceName serviceName: String?, override: Bool = false) throws -> String {
         guard let username = username, let serviceName = serviceName else {
             throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: -2000, userInfo: nil)
         }
@@ -54,7 +53,7 @@ public class LTHKeychainUtils: NSObject {
                 // Only return an error if a real exception happened - not simply for "not found."
                 throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: Int(status), userInfo: nil)
             }
-            return ""
+            throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: Int(noErr), userInfo: nil)
         }
         
         // We have an existing item, now query for the password data associated with it.
@@ -87,11 +86,14 @@ public class LTHKeychainUtils: NSObject {
            decryptedString.hasPrefix(prefix) {
             return String(decryptedString.dropFirst(prefix.count))
         } else {
-            let password = try getPassword(resultData: resultData) ?? ""
-            if !override {
-                try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true, override: true)
+            if let password = try getPassword(resultData: resultData) {
+                if !override {
+                    try storeUsername(username, andPassword: password, forServiceName: serviceName, updateExisting: true, override: true)
+                }
+                return password
+            } else {
+                throw NSError(domain: SFHFKeychainUtilsErrorDomain, code: Int(errSecItemNotFound), userInfo: nil)
             }
-            return password
         }
     }
     
