@@ -18,9 +18,6 @@ let package = Package(
             name: "LTHPasscodeViewController",
             path: ".",
             exclude: ["Demo", "CHANGELOG.md", "README.md", "Package.swift"],
-            resources: [
-                .process("LICENSE.txt")
-            ],
             publicHeadersPath: "LTHPasscodeViewController"
         )
     ]
