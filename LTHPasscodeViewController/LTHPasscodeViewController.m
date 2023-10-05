@@ -401,7 +401,7 @@ static const NSInteger LTHMaxPasscodeDigits = 10;
             [self _handleBiometricsFailureAndDisableIt:true];
         }
     }
-    else {
+    else if (!self.biometricsContext) {
         [self _handleBiometricsFailureAndDisableIt:true];
     }
 }
